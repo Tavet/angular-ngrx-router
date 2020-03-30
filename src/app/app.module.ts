@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { RouterEffects } from 'ngrx-router';
 
 import { appReducers } from './core/store/reducers/app.reducers';
 import { PostEffects } from './core/store/effects/post.effects';
@@ -21,7 +22,7 @@ import { PostEffects } from './core/store/effects/post.effects';
   ],
   imports: [
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([PostEffects]),
+    EffectsModule.forRoot([RouterEffects, PostEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     BrowserModule,

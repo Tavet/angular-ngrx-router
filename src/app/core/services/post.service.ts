@@ -23,8 +23,8 @@ export class PostService {
     } else {
       return of({
         blog: "Atolon Rot",
-        post: "# Not Found #" ,
-        author: "Atolon"
+        post: "No encontrado" ,
+        author: "No encontrado"
       })
     }
   }

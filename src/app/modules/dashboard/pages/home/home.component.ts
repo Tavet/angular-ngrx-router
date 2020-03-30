@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { IAppState } from './../../../../core/store/state/app.state';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { NgForm } from '@angular/forms';
+import { RouterGo } from 'ngrx-router';
+import { ActivatedRoute } from '@angular/router';
+import { noop } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +13,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<IAppState>) { }
 
   ngOnInit(): void {
   }
 
+
+  author(): void {
+    this.store.dispatch(new RouterGo({
+      path: [`dashboard/post/breyner`],
+    }))
+  }
 }

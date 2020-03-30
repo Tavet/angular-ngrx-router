@@ -1,1 +1,7 @@
-<p>post-detail works!</p>
+<div *ngIf="author$">
+    <h3>Blog: <small>{{ (author$ | async).blog }}</small></h3>
+    <h3>Post: <small>{{ (author$ | async).author }}</small></h3>
+    <h3>URL: <small>{{ (author$ | async).post }}</small></h3>
+</div>
+
+<button (click)="goBack()">Regresar</button>

@@ -1,17 +1,22 @@
 import { PostService } from './../../services/post.service';
-import { GetPost, EPostActions, GetPostSuccess } from './../actions/post.actions';
+import { GetPostSuccess } from './../actions/post.actions';
 import { Injectable } from '@angular/core';
-import { Effect, ofType, Actions } from '@ngrx/effects';
+import { Effect, Actions } from '@ngrx/effects';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { ofRoute } from 'ngrx-router';
+import { mapToParam } from 'src/app/shared/pipes/operator';
 
 @Injectable()
 export class PostEffects {
 
     @Effect()
-    getPost$ = this.actions$.pipe(
-        ofType<GetPost>(EPostActions.GetPostAction),
-        switchMap(action => this.postService.getPostByAuthor(action.author)),
+    postRouted$ = this.actions$.pipe(
+        ofRoute('dashboard/post/:author'),
+        mapToParam<string>('author'),
+        switchMap(author => {
+            return this.postService.getPostByAuthor(author)
+        }),
         switchMap(response => {
             return of(new GetPostSuccess(response));
         })

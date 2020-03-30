@@ -9,7 +9,7 @@ const dashboardRoutes: Routes = [
     {
         path: 'dashboard', component: FrameComponent, children: [
             {
-                path: '', component: HomeComponent,
+                path: '', component: HomeComponent
             },
             {
                 path: 'post/:author', component: PostDetailComponent

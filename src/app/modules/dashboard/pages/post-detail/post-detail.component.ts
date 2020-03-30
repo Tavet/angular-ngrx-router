@@ -1,4 +1,8 @@
+import { selectPost } from './../../../../core/store/selectors/post.selectors';
+import { IAppState } from './../../../../core/store/state/app.state';
+import { Store, select } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
+import { RouterBack } from 'ngrx-router';
 
 @Component({
   selector: 'app-post-detail',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostDetailComponent implements OnInit {
 
-  constructor() { }
+  author$ = this.store.pipe(select(selectPost));
+  
+  constructor(private store: Store<IAppState>) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+  }
+
+  goBack(): void {
+    this.store.dispatch(new RouterBack());
   }
 
 }
